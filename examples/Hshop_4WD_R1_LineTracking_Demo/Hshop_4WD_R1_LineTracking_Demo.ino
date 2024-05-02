@@ -18,7 +18,7 @@ void setup() {
 // xe dừng khi khởi động chương trình hoặc khi cấp nguồn 
 mctrl.car_stop();
 // xe dừng trong 5s
-delay(5000);
+delay(3000);
 }
 
 void loop() {
@@ -31,57 +31,52 @@ int right = digitalRead(A1);
   if((left==1)&&(mid==1)&&(right==1)) // 3 sen nằm trong
   {
     previous_dir=straight_dir;
-    mctrl.car_fw(50,50);
+    mctrl.car_fw(30,30);
   }
   else 
   {
     if((left==1)&&(right==1)) // 2 bên sensor nằm trong -> midsen nằm trong 
     {
       previous_dir=straight_dir;
-      mctrl.car_fw(50,50);
+      mctrl.car_fw(30,30);
     }
-  }
+else{
 // trường hợp điều hướng --> 1 sen nằm trong hoặc 2 sen nằm trong
   // 2 sen nằm trong -> 1 trái 1 giữa trong: chạy quẹo trái || 1 phải 1 giữa trong: chạy quẹo phải  
   if((left==1)&&(mid==1)&&(right==0)) // lệch trái: trái chậm, phải nhanh
   {
     previous_dir=right_straight_dir;
-    mctrl.car_fw(25,50);
+    mctrl.car_fw(15,30);
   }
+else {
   if((left==0)&&(mid==1)&&(right==1)) // lệch phải: phải chậm, trái nhanh
   {
     previous_dir=left_straight_dir;
-    mctrl.car_fw(50,25);
+    mctrl.car_fw(30,15);
   }
   // 1 sen nằm trong -> 1 trái trong: dừng quẹo trái || 1 phải trong: dừng quẹo phải
   if((left==1)&&(mid==0)&&(right==0)) // quẹo trái: trái dừng, phải chạy
   {
     previous_dir=right_rotate_dir;
-    mctrl.car_rotateL(50);
+    mctrl.car_rotateL(30);
   }
   if((left==0)&&(mid==0)&&(right==1)) // quẹo phải: phải dừng, trái chạy
   {
     previous_dir=left_rotate_dir;
-    mctrl.car_rotateR(50);
+    mctrl.car_rotateR(30);
   }
 
 // trường hợp tìm line --> 0 sen nằm trong
   if((left==0)&&(mid==0)&&(right==0))  
   {
-    
     last_dir=previous_dir;
-
-    if((last_dir==left_rotate_dir)||(last_dir==left_straight_dir)||(last_dir==straight_dir))
-    {
-      mctrl.car_rotateR(50);
-    }
-    if((last_dir==right_rotate_dir)||(last_dir==right_straight_dir)||(last_dir==straight_dir))
-    {
-      mctrl.car_rotateL(50);
-    }
-    // khởi tạo biến "hướng đi của xe vào lần cuối". 
-    // khi xe bị đẩy ra ngoài thì biến lần cuối sẽ thay đổi từ trong ra ngoài
-    // xét biến hướng đi của xe vào lần cuối.
- 
   }
+if((last_dir==left_rotate_dir))
+    {
+      mctrl.car_rotateR(30);
+    }
+if((last_dir==right_rotate_dir))
+    {
+      mctrl.car_rotateL(30);
+    }
 }
