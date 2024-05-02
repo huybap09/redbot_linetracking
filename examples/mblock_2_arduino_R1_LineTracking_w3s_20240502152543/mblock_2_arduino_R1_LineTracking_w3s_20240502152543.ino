@@ -26,7 +26,9 @@ void setup(){
     right_dir = 1;
     mid_dir = 3;
     last_lost_dir = left_dir;
-    speedForward = 20;
+    speedForward = 45;
+    int speedForwardlow = speedForward/2;
+    int stopspeed = 0;
     speedBackward = 20;
     while(1) {
 
@@ -34,20 +36,31 @@ void setup(){
         eye_Left_Value = digitalRead(A3);
         eye_Right_Value = digitalRead(A1);
         eye_Mid_Value = digitalRead(A2);
-        if((eye_Left_Value > threshold_left)  &&  (eye_Right_Value < threshold_right)  &&  (eye_Mid_Value > threshold_mid)){
+        //
+        if((eye_Mid_Value > threshold_mid)){
 
           demoMotor.car_fw(speedForward,speedForward);
 
         }else{
+          if((eye_Left_Value > threshold_left)  &&  (eye_Right_Value < threshold_right) &&  (eye_Mid_Value > threshold_mid)){
+
+
+            demoMotor.car_fw(speedForwardlow,speedForward);
+            }else{
+          if((eye_Left_Value < threshold_left)  &&  (eye_Right_Value > threshold_right) &&  (eye_Mid_Value > threshold_mid)){
+
+
+            demoMotor.car_fw(speedForward,speedForwardlow);
+            }else{
           if((eye_Left_Value > threshold_left)  &&  (eye_Right_Value < threshold_right) &&  (eye_Mid_Value < threshold_mid)){
             last_lost_dir = left_dir;
 
-            demoMotor.car_fw(0,speedBackward);
+            demoMotor.car_fw(stopspeed,speedForward);
           }else{
             if((eye_Left_Value < threshold_left)  &&  (eye_Right_Value > threshold_right) &&  (eye_Mid_Value < threshold_mid)){
               last_lost_dir = right_dir;
 
-              demoMotor.car_fw(speedForward,0);  
+              demoMotor.car_fw(speedForward,stopspeed);  
 
             }else{
               if(last_lost_dir == left_dir){
@@ -67,6 +80,8 @@ void setup(){
 
     }
 
+}
+}
 }
 
 void loop(){
