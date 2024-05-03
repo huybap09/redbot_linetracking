@@ -1,6 +1,5 @@
 #include <Arduino.h>
 #include "Makerlabvn_SimpleMotor.h"
-#include "SoftwareSerial.h"
 /* ------------------------------------------------------------------------- */
 /*                                   DEFINE                                  */
 /* ------------------------------------------------------------------------- */
@@ -46,8 +45,5 @@
 #define PIN_OUT2 A2 //! A2
 #define PIN_OUT3 A3 //! A3
 
-#define PIN_TX_BLE 2 //! D2
-#define PIN_RX_BLE 3 //! D3
 
-extern SoftwareSerial mySerial;
 extern Makerlabvn_SimpleMotor demoMotor;
