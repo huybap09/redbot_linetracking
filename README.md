@@ -123,7 +123,6 @@ float speedForward;
 float threshold_right;
 float right_dir;
 float threshold_mid;
-float mid_dir;
 float speedForwardlow;
 float stopspeed;
 
@@ -133,7 +132,6 @@ void setup(){
     threshold_mid = 0.5;
     left_dir = 0;
     right_dir = 1;
-    mid_dir = 3;
     last_lost_dir = left_dir;
     speedForward = 35;
     speedForwardlow = speedForward/2;
