@@ -23,7 +23,7 @@ void setup(){
     right_dir = 1;
     mid_dir = 3;
     last_lost_dir = left_dir;
-    speedForward = 45;
+    speedForward = 35;
     speedForwardlow = speedForward/2;
     stopspeed = 0;
 }
